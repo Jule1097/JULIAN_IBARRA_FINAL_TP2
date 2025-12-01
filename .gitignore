@@ -1,0 +1,28 @@
+# Archivos de configuración de editores
+.vscode/
+.idea/
+
+# Dependencias de Node.js
+node_modules/
+
+# Archivos de logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Compilados y temporales
+dist/
+build/
+tmp/
+*.tmp
+
+# Entornos virtuales de Python
+venv/
+__pycache__/
+*.pyc
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
