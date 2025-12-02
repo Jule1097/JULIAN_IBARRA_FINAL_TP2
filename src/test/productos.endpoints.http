@@ -1,0 +1,68 @@
+@host = 127.0.0.1
+@port = 3000
+
+@id = 692e224d77a4f460770109fd
+
+@endpointTemplate = api/v1/productos
+
+@contentType = application/json
+
+@apiKey = supersecretapikey12345
+
+@apiKeyInvalid = invalidapikey67890
+
+### en este caso utilice una api-key para proteccion de endpoints de modificacion de datos, la misma se encuentra en el header "x-api-key", hay 2 una valida y otra invalida para los test. ###
+
+### traer los productos
+GET http://{{host}}:{{port}}/{{endpointTemplate}}
+
+### crear nuevo producto con todos los campos correctos
+POST http://{{host}}:{{port}}/{{endpointTemplate}}
+Content-Type: {{contentType}}
+
+ {
+    "producto": "Monitor Dell 27\"",
+    "stockAmount": 20,
+    "fechaIngreso": "2025-10-28"
+  }
+
+
+### crear nuevo producto con campos erroneos
+POST http://{{host}}:{{port}}/{{endpointTemplate}}
+Content-Type: {{contentType}}
+
+{
+    "producto": "",
+    "stockAmount": 4
+}
+
+### buscar producto por ID
+GET http://{{host}}:{{port}}/{{endpointTemplate}}/{{id}}
+
+### editar stockAmount de un producto por id con apiKey
+PUT http://{{host}}:{{port}}/{{endpointTemplate}}/{{id}}
+Content-Type: {{contentType}}
+x-api-key: {{apiKey}}
+
+{
+    "newStockAmount": 30
+}
+
+### editar stockAmount de un producto por id sin apiKey
+PUT http://{{host}}:{{port}}/{{endpointTemplate}}/{{id}}
+Content-Type: {{contentType}}
+
+{
+    "newStockAmount": 25
+}
+
+### eliminar un producto por su id con apiKey
+DELETE http://{{host}}:{{port}}/{{endpointTemplate}}/{{id}}
+x-api-key: {{apiKey}}
+
+### eliminar un producto por su id sin apiKey
+DELETE http://{{host}}:{{port}}/{{endpointTemplate}}/{{id}}
+
+### eliminar un producto por su id con apiKey invalida
+DELETE http://{{host}}:{{port}}/{{endpointTemplate}}/{{id}}
+x-api-key: {{apiKeyInvalid}}
